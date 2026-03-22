@@ -54,7 +54,7 @@ export default function TuongHop() {
         </p>
       </div>
 
-      <div className="glass p-6 md:p-8 rounded-3xl border mb-10">
+      <div className="bg-white/80 dark:bg-stone-800/80 backdrop-blur-md p-8 rounded-[2rem] border-2 border-stone-100 dark:border-stone-700 shadow-xl shadow-stone-900/5 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Người 1 */}
           <div className="p-6 rounded-2xl border border-stone-800 bg-stone-900/30">
@@ -154,7 +154,7 @@ export default function TuongHop() {
             className="space-y-8"
           >
             {/* Tổng Điểm */}
-            <div className="glass p-8 rounded-3xl border text-center relative overflow-hidden">
+            <div className="bg-white/80 dark:bg-stone-800/80 backdrop-blur-md p-8 rounded-[2rem] border-2 border-stone-100 dark:border-stone-700 shadow-xl shadow-stone-900/5 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5">
                 <Heart size={200} />
               </div>
@@ -193,7 +193,7 @@ export default function TuongHop() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="glass p-6 rounded-2xl border"
+                  className="p-6 rounded-2xl border border-stone-100 dark:border-stone-700 bg-white/70 dark:bg-stone-800/70 shadow-sm"
                 >
                   <h3 className="text-amber-500 font-bold text-lg mb-1">{item.title}</h3>
                   <div className="flex justify-between items-center mb-4">

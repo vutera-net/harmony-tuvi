@@ -41,7 +41,7 @@ export default function BatTu() {
   };
 
   const hanhColors: Record<string, string> = {
-    Kim: "bg-stone-200 text-stone-800 border-stone-300",
+    Kim: "bg-zinc-200 text-zinc-800 border-zinc-300",
     Mộc: "bg-green-100 text-green-800 border-green-300",
     Thủy: "bg-blue-100 text-blue-800 border-blue-300",
     Hỏa: "bg-red-100 text-red-800 border-red-300",
@@ -64,7 +64,7 @@ export default function BatTu() {
         </p>
       </div>
 
-      <div className="glass p-6 md:p-8 rounded-3xl border mb-10">
+      <div className="bg-white/80 dark:bg-stone-800/80 backdrop-blur-md p-8 rounded-[2rem] border-2 border-stone-100 dark:border-stone-700 shadow-xl shadow-stone-900/5 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
             <label className="block text-sm font-medium text-stone-400 mb-2 flex items-center gap-2">
@@ -125,9 +125,9 @@ export default function BatTu() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="glass p-6 rounded-2xl border text-center relative overflow-hidden group"
+                  className="p-6 rounded-2xl border border-stone-100 dark:border-stone-700 bg-white/70 dark:bg-stone-800/70 shadow-sm text-center relative overflow-hidden group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-stone-900/50 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-stone-100/50 dark:to-stone-900/50 pointer-events-none" />
                   <div className="text-xs font-bold tracking-widest text-stone-500 mb-4">{tru.label}</div>
                   
                   <div className="space-y-4 relative z-10">
@@ -153,13 +153,13 @@ export default function BatTu() {
 
             {/* Radar & Analysis */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="glass p-6 rounded-3xl border flex flex-col items-center justify-center min-h-[400px]">
+              <div className="p-6 rounded-2xl border border-stone-100 dark:border-stone-700 bg-white/70 dark:bg-stone-800/70 shadow-sm flex flex-col items-center justify-center min-h-[400px]">
                 <h3 className="text-lg font-serif font-bold mb-6 text-amber-500">Bản Đồ Ngũ Hành</h3>
                 <RadarChart data={result.nguHanhCount} />
               </div>
               
               <div className="space-y-6">
-                <div className="glass p-6 rounded-3xl border h-full">
+                <div className="p-6 rounded-2xl border border-stone-100 dark:border-stone-700 bg-white/70 dark:bg-stone-800/70 shadow-sm h-full">
                   <h3 className="text-lg font-serif font-bold mb-6 text-amber-500">Phân Tích Vượng Khuyết</h3>
                   
                   <div className="space-y-6">

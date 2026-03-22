@@ -38,7 +38,7 @@ export default function RadarChart({ data }: { data: RadarData }) {
   const pathData = points.map((p, i) => (i === 0 ? `M ${p.x},${p.y}` : `L ${p.x},${p.y}`)).join(" ") + " Z";
   
   const COLORS: Record<string, string> = {
-    Kim: "text-stone-300",
+    Kim: "text-zinc-300",
     Thủy: "text-blue-400",
     Mộc: "text-green-500",
     Hỏa: "text-red-500",
