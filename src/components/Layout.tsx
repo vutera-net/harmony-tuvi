@@ -2,7 +2,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Compass, Calendar as CalendarIcon, Scale, Home as HomeIcon } from "lucide-react";
+import { Compass, Calendar as CalendarIcon, Scale, Home as HomeIcon, Sparkles, Heart } from "lucide-react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -10,6 +10,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const navItems = [
     { path: "/", label: "Trang chủ", icon: <HomeIcon size={20} /> },
     { path: "/calendar", label: "Xem ngày", icon: <CalendarIcon size={20} /> },
+    { path: "/bat-tu", label: "Bát tự", icon: <Sparkles size={20} /> },
+    { path: "/tuong-hop", label: "Hợp tuổi", icon: <Heart size={20} /> },
     { path: "/can-xuong", label: "Cân xương", icon: <Scale size={20} /> },
     { path: "/bat-trach", label: "Hướng nhà", icon: <Compass size={20} /> },
   ];
