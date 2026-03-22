@@ -1,5 +1,5 @@
 # Product Requirements Document (PRD)
-**Tên sản phẩm:** Harmony TuVi - Web App Phong Thủy, Tử Vi & Xem Ngày
+**Tên sản phẩm:** An Mệnh - Web App Phong Thủy, Tử Vi & Xem Ngày
 **Nền tảng:** Web Application (Mobile-first Responsive)
 
 ---
@@ -55,7 +55,7 @@
   - Phong cách "Mystical Modern" (Giao diện tối - Dark mode với các ánh sáng Neon gradient biểu tượng vũ trụ/chiêm tinh).
   - HOẶC "Zen Minimal" (Giao diện sáng - Background beige/off-white, Typography thanh lịch kết hợp font serif cho tiêu đề).
 - **Typography:** *Inter* kết hợp *Playfair Display* để tạo điểm nhấn truyền thống nhưng vẫn cao cấp.
-- **Animations:** Micro-animations với Framer Motion. Hiệu ứng la bàn xoay mượt mà.
+- **Animations:** Micro-animations với Framer Motion. Hiệu ứng la bàn xoay mượt màng.
 
 ## 5. Yêu cầu Kỹ thuật (Technical Specifications)
 - **Frontend Framework:** Next.js (App Router)
@@ -69,6 +69,12 @@
   - Thuật toán chuyển đổi lịch chuẩn hóa (Hồ Ngọc Đức logic).
   - Cá nhân hóa người dùng: "Tử vi hàng ngày" (Daily Luck dashboard) tại Trang chủ.
   - UI/UX Polish: Nâng cấp La Bàn Bát Trạch sinh động quay chính xác theo độ, Modal Cân Xương hiện chi tiết giải nghĩa, Lịch có bộ lọc mạnh.
-- **Giai đoạn 4 (Phân tích nâng cao):** [TIẾP THEO]
+- **Giai đoạn 4 (Phân tích nâng cao):** [HOÀN THÀNH]
   - Xây dựng module Bát Tự phức tạp và biểu đồ Radar Ngũ Hành.
   - Tính năng Xem tuổi tương hợp đôi lứa.
+- **Giai đoạn 5 (Review & Polish):** [HOÀN THÀNH]
+  - Cập nhật và đồng bộ UI Trang chủ cho hợp lý sau Phase 4.
+  - Thay đổi màu Ngũ hành Kim khác biệt với Thổ.
+  - Cải thiện Lịch (làm rõ ngày Hắc đạo so với ngày thường).
+  - Đồng bộ UI trang Bát tự và Hợp tuổi với Toàn hệ thống.
+  - Xác minh lại thuật toán La Bàn Bát Trạch.

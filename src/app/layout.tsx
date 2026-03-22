@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-  title: "Harmony TuVi - Thấu Hiểu Vận Mệnh, Kiến Tạo Bình An",
+  title: "An Mệnh - Thấu Hiểu Vận Mệnh, Kiến Tạo Bình An",
   description: "Ứng dụng xem tử vi, phong thủy, lịch vạn niên hiện đại theo phong cách Zen.",
 };
 

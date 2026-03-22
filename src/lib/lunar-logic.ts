@@ -1,5 +1,5 @@
 /**
- * Harmony TuVi - Core Astrology Logic
+ * An Mệnh - Core Astrology Logic
  * Implements the Hồ Ngọc Đức Solar-to-Lunar algorithm for Vietnamese dates.
  * https://www.informatik.uni-leipzig.de/~duc/amlich/calrules.html
  */

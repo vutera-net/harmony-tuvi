@@ -12,7 +12,7 @@ export default function BatTu() {
   const [isCalculating, setIsCalculating] = useState(false);
 
   useEffect(() => {
-    const savedProfile = localStorage.getItem("tuvi_profile");
+    const savedProfile = localStorage.getItem("anmenh_profile") || localStorage.getItem("tuvi_profile");
     if (savedProfile) {
       try {
         const p = JSON.parse(savedProfile);

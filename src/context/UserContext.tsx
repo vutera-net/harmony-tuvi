@@ -1,7 +1,8 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const STORAGE_KEY = "harmony_tuvi_profile_v2";
+const STORAGE_KEY = "anmenh_profile";
+const OLD_KEYS = ["harmony_tuvi_profile_v2", "harmony_tuvi_profile", "tuvi_profile"];
 
 export interface UserProfile {
   name: string;
@@ -23,10 +24,21 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    // Try new key first, fall back to old key
-    const saved =
-      localStorage.getItem(STORAGE_KEY) ||
-      localStorage.getItem("harmony_tuvi_profile");
+    // Try new key first, then migration logic
+    let saved = localStorage.getItem(STORAGE_KEY);
+    
+    if (!saved) {
+      for (const oldKey of OLD_KEYS) {
+        const val = localStorage.getItem(oldKey);
+        if (val) {
+          saved = val;
+          // Clean up old keys as we encounter them
+          localStorage.removeItem(oldKey);
+          break;
+        }
+      }
+    }
+    
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -54,7 +66,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const clearProfile = () => {
     setProfile(null);
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem("harmony_tuvi_profile");
+    OLD_KEYS.forEach(k => localStorage.removeItem(k));
   };
 
   return (

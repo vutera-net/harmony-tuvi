@@ -1,5 +1,5 @@
 # Product Requirements Document (PRD)
-**Tên sản phẩm:** Harmony TuVi - Web App Phong Thủy, Tử Vi & Xem Ngày
+**Tên sản phẩm:** An Mệnh - Web App Phong Thủy, Tử Vi & Xem Ngày
 **Nền tảng:** Web Application (Mobile-first Responsive)
 
 ---

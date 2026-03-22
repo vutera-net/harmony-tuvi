@@ -23,10 +23,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 glass border-b px-6 py-4 flex justify-between items-center transition-colors">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-[var(--foreground)] flex items-center justify-center">
-            <span className="text-amber-400 font-serif font-bold text-xl leading-none">H</span>
+            <span className="text-amber-400 font-serif font-bold text-xl leading-none">A</span>
           </div>
           <h1 className="text-xl font-serif font-bold tracking-tight text-[var(--foreground)]">
-            Harmony <span className="text-amber-600">TuVi</span>
+            An <span className="text-amber-600">Mệnh</span>
           </h1>
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -34,9 +34,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Link
               key={item.path}
               href={item.path}
-              className={`${
-                isActive(item.path) ? "text-amber-600 font-bold" : "text-stone-500 hover:text-amber-600"
-              } transition-colors`}
+              className={`${isActive(item.path) ? "text-amber-600 font-bold" : "text-stone-500 hover:text-amber-600"
+                } transition-colors`}
             >
               {item.label}
             </Link>
@@ -54,9 +53,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link
             key={item.path}
             href={item.path}
-            className={`flex flex-col items-center gap-1 ${
-              isActive(item.path) ? "text-amber-600" : "text-stone-400 hover:text-amber-600"
-            } transition-colors`}
+            className={`flex flex-col items-center gap-1 ${isActive(item.path) ? "text-amber-600" : "text-stone-400 hover:text-amber-600"
+              } transition-colors`}
           >
             {item.icon}
             <span className="text-[10px] font-medium">{item.label}</span>
@@ -71,7 +69,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <a href="#">Điều khoản</a>
           <a href="#">Bảo mật</a>
         </div>
-        <p>© 2026 Harmony TuVi. All rights reserved.</p>
+        <p>© 2026 An Mệnh. All rights reserved.</p>
       </footer>
     </div>
   );

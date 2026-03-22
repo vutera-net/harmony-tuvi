@@ -1,21 +1,20 @@
-# Implementation Plan - Phase 4: Bát Tự & Khả Năng Mở Rộng
-
-Phase 3 đã hoàn thành xuất sắc việc xây dựng nền tảng vững chắc cho logic tử vi (áp dụng lịch Hồ Ngọc Đức chuẩn Việt Nam), cũng như hoàn thiện trải nghiệm UX/UI (Dark Mode, Framer Motion, Dashboard Hàng Ngày). 
-
-Bước tiếp theo (Phase 4) sẽ tập trung vào các tính năng học thuật sâu hơn.
+# Implementation Plan - Phase 5: Giai đoạn 5: Tinh chỉnh & Đồng bộ
+Phase 4 đã hoàn thành việc xây dựng module Bát Tự Tứ Trụ và Xem Tuổi Tương Hợp. 
 
 ## Proposed Changes
 
-### 1. Module Bát Tự Tứ Trụ
-- [ ] Xây dựng thuật toán an lá số Bát Tự (Can Chi của Năm, Tháng, Ngày, Giờ).
-- [ ] Biểu đồ Radar đánh giá trạng thái Ngũ Hành (Kim, Mộc, Thủy, Hỏa, Thổ) - Khuyết / Vượng.
-- [ ] Phân tích tổng quan vòng trường sinh và Thập Thần.
+### 1. Đồng bộ Giao Diện & Trải Nghiệm (UI/UX Sync) - [HOÀN THÀNH]
+- [x] **Màu Ngũ Hành**: Đổi màu của mệnh Kim sang xám bạc/ánh kim (tránh nhầm lẫn màu vàng/nâu của Thổ). Chỉnh sửa tại `RadarChart.tsx` và `BatTu.tsx`.
+- [x] **Lịch Vạn Niên (`calendar/page.tsx`)**: Đổi màu hoặc style ngày Hắc Đạo (ví dụ tông đỏ nhạt `rose`) để khác biệt hoàn toàn với ngày bình thường. 
+- [x] **Trang Chủ (`Home.tsx`)**: Đưa tính năng Bát Tự và Xem Tuổi Hợp vào UI menu/Dashboard chính.
+- [x] **Layouting Bát Tự & Hợp Tuổi (`BatTu.tsx`, `TuongHop.tsx`)**: Tiêu chuẩn hóa phong cách `backdrop-blur-md` trên toàn bộ các trang để nhìn tinh tế hệt như La Bàn Hướng Nhà.
+- [x] **Cân bằng tương phản**: Fix lỗi mờ chữ ở Light mode và các thẻ Ngũ hành ở Dark mode.
 
-### 2. Xem Tuổi Tương Hợp Đôi Lứa
-- [ ] Form nhập liệu kép cho 2 người (Nam/Nữ).
-- [ ] Logic đối chiếu Thiên Can, Địa Chi (Tam hợp, Lục hợp, Tứ hành xung) và Cung Phi bát trạch.
-- [ ] Tính toán điểm tương hợp (%) và đưa ra lời khuyên.
+### 2. Thuật toán La Bàn Bát Trạch - [HOÀN THÀNH]
+- [x] Sửa lỗi toán học tính **Cung Phi** trong `lunar-logic.ts` (áp dụng công thức mod 9 chuẩn phong thủy).
+- [x] Đảm bảo la bàn xoay chuẩn góc phong thủy theo Cung Phi mới.
 
-### 3. Tối ưu Hệ Thống & Performance
-- [ ] Tách nhỏ `lunar-logic.ts` thành cấu trúc folder modular (nếu tệp trở nên quá lớn).
-- [ ] Đóng gói Web App dưới dạng PWA (Progressive Web App) để cài đặt offline trên thiết bị di động.
+### 3. Tối ưu Hệ Thống & Nhãn Hiệu - [HOÀN THÀNH]
+- [x] Rebranding dự án từ Harmony TuVi sang **An Mệnh**.
+- [x] Cập nhật toàn bộ LocalStorage key sang `anmenh_profile`.
+- [x] Đồng bộ các tệp `.agent/` theo nhãn hiệu mới.
