@@ -144,9 +144,11 @@ export function solarToLunar(date: Date): LunarDate {
   let monthStart = getNewMoonDay(k + 1, timeZone);
   if (monthStart > dayNumber) monthStart = getNewMoonDay(k, timeZone);
 
-  let a11 = getLunarMonth11(yy, timeZone);
-  let b11 = a11;
-  if (a11 >= monthStart) {
+  const a11Initial = getLunarMonth11(yy, timeZone);
+  let a11 = a11Initial;
+  let b11 = a11Initial;
+  const a11FromPrevYear = a11Initial >= monthStart;
+  if (a11FromPrevYear) {
     a11 = getLunarMonth11(yy - 1, timeZone);
   } else {
     b11 = getLunarMonth11(yy + 1, timeZone);
@@ -166,9 +168,9 @@ export function solarToLunar(date: Date): LunarDate {
   }
 
   if (lunarMonth > 12) lunarMonth -= 12;
-  if (lunarMonth >= 11 && diff < 4) lunarMonth -= 12;
 
-  const lunarYear = yy + (lunarMonth >= 11 && diff < 4 ? -1 : 0);
+  // Only use yy-1 when a11 came from the previous solar year (date is before current year's month 11)
+  const lunarYear = (lunarMonth >= 11 && a11FromPrevYear) ? yy - 1 : yy;
   const canChi = getYearCanChi(lunarYear);
 
   return {

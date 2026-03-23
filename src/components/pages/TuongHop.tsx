@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { calculateTuongHop, TuongHopResult } from "@/lib/tuong-hop-logic";
+import { getYearCanChi } from "@/lib/lunar-logic";
 import { Heart, User, RefreshCw, Sparkles } from "lucide-react";
 
 export default function TuongHop() {
@@ -72,6 +73,11 @@ export default function TuongHop() {
                   onChange={(e) => setYear1(Number(e.target.value))}
                   className="w-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
+                {year1 >= 1900 && year1 <= currentYear && (
+                  <p className="text-xs text-amber-600 dark:text-amber-500 mt-1 font-medium">
+                    {getYearCanChi(year1)}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Giới tính</label>
@@ -109,6 +115,11 @@ export default function TuongHop() {
                   onChange={(e) => setYear2(Number(e.target.value))}
                   className="w-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
+                {year2 >= 1900 && year2 <= currentYear && (
+                  <p className="text-xs text-amber-600 dark:text-amber-500 mt-1 font-medium">
+                    {getYearCanChi(year2)}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Giới tính</label>
