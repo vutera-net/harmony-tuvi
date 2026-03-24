@@ -2,21 +2,20 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Compass, Calendar as CalendarIcon, Scale, Home as HomeIcon, Sparkles, Heart } from "lucide-react";
+import { Compass, Calendar as CalendarIcon, Home as HomeIcon, Sparkles } from "lucide-react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const navItems = [
-    { path: "/", label: "Trang chủ", icon: <HomeIcon size={20} /> },
-    { path: "/calendar", label: "Xem ngày", icon: <CalendarIcon size={20} /> },
-    { path: "/bat-tu", label: "Bát tự", icon: <Sparkles size={20} /> },
-    { path: "/tuong-hop", label: "Hợp tuổi", icon: <Heart size={20} /> },
-    { path: "/can-xuong", label: "Cân xương", icon: <Scale size={20} /> },
-    { path: "/bat-trach", label: "Hướng nhà", icon: <Compass size={20} /> },
+    { path: "/", label: "Trang chủ", icon: <HomeIcon size={20} />, exact: true },
+    { path: "/calendar", label: "Xem ngày", icon: <CalendarIcon size={20} />, exact: false },
+    { path: "/tu-vi", label: "Tử Vi", icon: <Sparkles size={20} />, exact: false },
+    { path: "/bat-trach", label: "Hướng nhà", icon: <Compass size={20} />, exact: false },
   ];
 
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string, exact: boolean) =>
+    exact ? pathname === path : pathname === path || pathname.startsWith(path + "/");
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--background)] transition-colors duration-300">
@@ -34,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Link
               key={item.path}
               href={item.path}
-              className={`${isActive(item.path) ? "text-amber-600 font-bold" : "text-stone-500 hover:text-amber-600"
+              className={`${isActive(item.path, item.exact) ? "text-amber-600 font-bold" : "text-stone-500 hover:text-amber-600"
                 } transition-colors`}
             >
               {item.label}
@@ -53,7 +52,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link
             key={item.path}
             href={item.path}
-            className={`flex flex-col items-center gap-1 ${isActive(item.path) ? "text-amber-600" : "text-stone-400 hover:text-amber-600"
+            className={`flex flex-col items-center gap-1 ${isActive(item.path, item.exact) ? "text-amber-600" : "text-stone-400 hover:text-amber-600"
               } transition-colors`}
           >
             {item.icon}

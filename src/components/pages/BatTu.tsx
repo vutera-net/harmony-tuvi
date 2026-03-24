@@ -4,38 +4,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import { calculateBatTu, BatTuResult } from "@/lib/battu-logic";
 import RadarChart from "../RadarChart";
 import { Sparkles, Calendar, Clock, RefreshCw } from "lucide-react";
+import { useUser } from "@/context/UserContext";
 
 export default function BatTu() {
+  const { profile } = useUser();
   const [dateStr, setDateStr] = useState("1995-05-15");
   const [timeStr, setTimeStr] = useState("08:30");
   const [result, setResult] = useState<BatTuResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
   useEffect(() => {
-    const savedProfile = localStorage.getItem("anmenh_profile") || localStorage.getItem("tuvi_profile");
-    if (savedProfile) {
-      try {
-        const p = JSON.parse(savedProfile);
-        if (p.year && p.month && p.day) {
-          setDateStr(`${p.year}-${String(p.month).padStart(2, '0')}-${String(p.day).padStart(2, '0')}`);
-        }
-      } catch (e) {}
+    if (profile?.birthYear) {
+      setDateStr(`${profile.birthYear}-01-01`);
     }
-  }, []);
+  }, [profile]);
 
   const handleCalculate = () => {
     if (!dateStr || !timeStr) return;
     setIsCalculating(true);
-    
-    setTimeout(() => {
-      const [y, m, d] = dateStr.split("-").map(Number);
-      const [hr, min] = timeStr.split(":").map(Number);
-      const dateObj = new Date(y, m - 1, d, hr, min);
-      
-      const res = calculateBatTu(dateObj);
-      setResult(res);
-      setIsCalculating(false);
-    }, 600);
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const [hr, min] = timeStr.split(":").map(Number);
+    const dateObj = new Date(y, m - 1, d, hr, min);
+    setResult(calculateBatTu(dateObj));
+    setIsCalculating(false);
   };
 
   const hanhColors: Record<string, string> = {
@@ -65,10 +56,11 @@ export default function BatTu() {
       <div className="bg-white/90 dark:bg-stone-800/80 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-stone-100 dark:border-stone-700 shadow-xl shadow-stone-900/5 mb-10 mx-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
-            <label className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
+            <label htmlFor="battu-date" className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
               <Calendar size={16} /> Ngày sinh (Dương lịch)
             </label>
             <input
+              id="battu-date"
               type="date"
               value={dateStr}
               onChange={(e) => setDateStr(e.target.value)}
@@ -76,10 +68,11 @@ export default function BatTu() {
             />
           </div>
           <div>
-            <label className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
+            <label htmlFor="battu-time" className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
               <Clock size={16} /> Giờ sinh
             </label>
             <input
+              id="battu-time"
               type="time"
               value={timeStr}
               onChange={(e) => setTimeStr(e.target.value)}

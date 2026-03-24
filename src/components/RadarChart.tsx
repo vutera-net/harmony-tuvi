@@ -47,7 +47,7 @@ export default function RadarChart({ data }: { data: RadarData }) {
 
   return (
     <div className="relative flex items-center justify-center w-full" style={{ height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label="Biểu đồ Radar Ngũ Hành: Kim, Thủy, Mộc, Hỏa, Thổ">
         {/* Lưới đa giác nền */}
         {[0.25, 0.5, 0.75, 1].map((scale, gridIdx) => {
           const gridPoints = elements.map((_, i) => getPoint(maxDomain * scale, (360 / 5) * i));

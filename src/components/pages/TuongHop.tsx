@@ -1,28 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { calculateTuongHop, TuongHopResult } from "@/lib/tuong-hop-logic";
 import { getYearCanChi } from "@/lib/lunar-logic";
-import { Heart, User, RefreshCw, Sparkles } from "lucide-react";
+import { Heart, User, Sparkles } from "lucide-react";
+import { useUser } from "@/context/UserContext";
 
 export default function TuongHop() {
+  const { profile } = useUser();
   const [year1, setYear1] = useState(1995);
   const [gender1, setGender1] = useState<"male" | "female">("male");
-  
+
   const [year2, setYear2] = useState(1997);
   const [gender2, setGender2] = useState<"male" | "female">("female");
-  
+
   const [result, setResult] = useState<TuongHopResult | null>(null);
-  const [isCalculating, setIsCalculating] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
+  useEffect(() => {
+    if (profile?.birthYear) {
+      setYear1(profile.birthYear);
+      setGender1(profile.gender || "male");
+    }
+  }, [profile]);
+
   const handleCalculate = () => {
-    setIsCalculating(true);
-    setTimeout(() => {
-      setResult(calculateTuongHop(year1, gender1, year2, gender2));
-      setIsCalculating(false);
-    }, 600);
+    setResult(calculateTuongHop(year1, gender1, year2, gender2));
   };
 
   const getScoreColor = (score: number) => {
@@ -71,7 +75,7 @@ export default function TuongHop() {
                   max={currentYear}
                   value={year1}
                   onChange={(e) => setYear1(Number(e.target.value))}
-                  className="w-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
+                  className="w-full bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
                 {year1 >= 1900 && year1 <= currentYear && (
                   <p className="text-xs text-amber-600 dark:text-amber-500 mt-1 font-medium">
@@ -84,13 +88,13 @@ export default function TuongHop() {
                 <div className="flex gap-3">
                   <button 
                     onClick={() => setGender1("male")}
-                    className={`flex-1 py-3 rounded-xl border font-bold transition-all text-sm ${gender1 === "male" ? "bg-stone-900 dark:bg-amber-500/10 border-stone-900 dark:border-amber-500 text-white dark:text-amber-500" : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 text-stone-500"}`}
+                    className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender1 === "male" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nam
                   </button>
                   <button 
                     onClick={() => setGender1("female")}
-                    className={`flex-1 py-3 rounded-xl border font-bold transition-all text-sm ${gender1 === "female" ? "bg-stone-900 dark:bg-amber-500/10 border-stone-900 dark:border-amber-500 text-white dark:text-amber-500" : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 text-stone-500"}`}
+                    className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender1 === "female" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nữ
                   </button>
@@ -113,7 +117,7 @@ export default function TuongHop() {
                   max={currentYear}
                   value={year2}
                   onChange={(e) => setYear2(Number(e.target.value))}
-                  className="w-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
+                  className="w-full bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
                 {year2 >= 1900 && year2 <= currentYear && (
                   <p className="text-xs text-amber-600 dark:text-amber-500 mt-1 font-medium">
@@ -126,13 +130,13 @@ export default function TuongHop() {
                 <div className="flex gap-3">
                   <button 
                     onClick={() => setGender2("male")}
-                    className={`flex-1 py-3 rounded-xl border font-bold transition-all text-sm ${gender2 === "male" ? "bg-stone-900 dark:bg-amber-500/10 border-stone-900 dark:border-amber-500 text-white dark:text-amber-500" : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 text-stone-500"}`}
+                    className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender2 === "male" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nam
                   </button>
                   <button 
                     onClick={() => setGender2("female")}
-                    className={`flex-1 py-3 rounded-xl border font-bold transition-all text-sm ${gender2 === "female" ? "bg-stone-900 dark:bg-amber-500/10 border-stone-900 dark:border-amber-500 text-white dark:text-amber-500" : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 text-stone-500"}`}
+                    className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender2 === "female" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nữ
                   </button>
@@ -144,20 +148,15 @@ export default function TuongHop() {
 
         <button
           onClick={handleCalculate}
-          disabled={isCalculating}
           className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2"
         >
-          {isCalculating ? (
-            <RefreshCw className="animate-spin" size={18} />
-          ) : (
-            <Heart size={18} />
-          )}
-          {isCalculating ? "ĐANG PHÂN TÍCH NHÂN DUYÊN..." : "XEM TƯƠNG HỢP"}
+          <Heart size={18} />
+          XEM TƯƠNG HỢP
         </button>
       </div>
 
       <AnimatePresence mode="wait">
-        {result && !isCalculating && (
+        {result && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
