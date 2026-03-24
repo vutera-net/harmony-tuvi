@@ -52,7 +52,7 @@ const LEVEL_STYLES = {
 
 export default function CanXuong() {
   const { profile } = useUser();
-  const [year, setYear] = useState(1990);
+  const [year, setYear] = useState<number | "">(1990);
   const [month, setMonth] = useState(1);
   const [day, setDay] = useState(1);
   const [hourIdx, setHourIdx] = useState(0);
@@ -65,12 +65,14 @@ export default function CanXuong() {
     }
   }, [profile]);
 
-  const maxDays = new Date(year, month, 0).getDate();
+  const maxDays = new Date(Number(year) || 1990, month, 0).getDate();
   const safeDay = Math.min(day, maxDays);
 
   const handleCalculate = () => {
-    const res = calculateCanXuong(year, month, safeDay, hourIdx);
-    setResult(res);
+    if (typeof year === "number" && year >= 1900 && year <= 2030) {
+      const res = calculateCanXuong(year, month, safeDay, hourIdx);
+      setResult(res);
+    }
   };
 
   const s = result ? LEVEL_STYLES[result.level] : null;
@@ -108,43 +110,32 @@ export default function CanXuong() {
             {/* Year */}
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
-                Năm sinh
+                Năm sinh (Âm lịch)
               </label>
               <input
                 type="number"
-                value={year || ""}
-                onChange={(e) => setYear(parseInt(e.target.value) || 0)}
+                min={1900}
+                max={2030}
+                value={year === "" ? "" : year}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === "") setYear("");
+                  else setYear(parseInt(val));
+                }}
                 className="w-full bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all dark:text-stone-100"
               />
-              {year >= 1900 && year <= 2020 && (
+              {typeof year === 'number' && year >= 1900 && year <= 2030 && (
                 <p className="mt-1.5 text-xs text-amber-600 dark:text-amber-400 font-medium">
                   {getYearCanChi(year)}
                 </p>
               )}
             </div>
 
-            {/* Month + Day */}
+            {/* Day + Month (Vn style: Day first) */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
-                  Tháng sinh
-                </label>
-                <div className="relative">
-                  <select
-                    value={month}
-                    onChange={(e) => setMonth(parseInt(e.target.value))}
-                    className="w-full appearance-none bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 focus:border-amber-500 outline-none transition-all pr-8 dark:text-stone-100"
-                  >
-                    {Array.from({ length: 12 }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>Tháng {i + 1}</option>
-                    ))}
-                  </select>
-                  <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" />
-                </div>
-              </div>
-              <div>
-                <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
-                  Ngày sinh
+                  Ngày sinh (Âm lịch)
                 </label>
                 <div className="relative">
                   <select
@@ -154,6 +145,23 @@ export default function CanXuong() {
                   >
                     {Array.from({ length: maxDays }, (_, i) => (
                       <option key={i + 1} value={i + 1}>Ngày {i + 1}</option>
+                    ))}
+                  </select>
+                  <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
+                  Tháng sinh (Âm lịch)
+                </label>
+                <div className="relative">
+                  <select
+                    value={month}
+                    onChange={(e) => setMonth(parseInt(e.target.value))}
+                    className="w-full appearance-none bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 focus:border-amber-500 outline-none transition-all pr-8 dark:text-stone-100"
+                  >
+                    {Array.from({ length: 12 }, (_, i) => (
+                      <option key={i + 1} value={i + 1}>Tháng {i + 1}</option>
                     ))}
                   </select>
                   <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" />
@@ -182,7 +190,8 @@ export default function CanXuong() {
 
             <button
               onClick={handleCalculate}
-              className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2 group"
+              disabled={year === "" || year < 1900 || year > 2030}
+              className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2 group disabled:opacity-50"
             >
               Luận Giải Vận Mệnh <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
             </button>
@@ -239,7 +248,7 @@ export default function CanXuong() {
                 </div>
 
                 <p className="mt-6 text-center text-xs text-stone-400 dark:text-stone-500">
-                  Cân Xương cổ học · Năm {getYearCanChi(year)} · Giờ {HOURS[hourIdx].split(" ")[0]}
+                  Cân Xương cổ học · Năm {getYearCanChi(Number(year) || 1990)} · Giờ {HOURS[hourIdx].split(" ")[0]}
                 </p>
               </motion.div>
             ) : (

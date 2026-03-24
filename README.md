@@ -1,92 +1,91 @@
-# Product Requirements Document (PRD)
-**Tên sản phẩm:** An Mệnh - Web App Phong Thủy, Tử Vi & Xem Ngày
-**Nền tảng:** Web Application (Mobile-first Responsive)
+# An Mệnh ⛩️✨ - Web App Phong Thủy, Tử Vi & Xem Ngày
+
+**An Mệnh** (tiền thân là Harmony TuVi) là một ứng dụng web hiện đại, kết hợp tinh hoa giữa thuật số Phương Đông truyền thống và trải nghiệm người dùng hiện đại. Ứng dụng cung cấp các công cụ luận giải tử vi, phong thủy ứng dụng và lịch vạn niên với giao diện duy mỹ theo phong cách Zen.
+
+![An Mệnh Banner](https://images.unsplash.com/photo-1528120369764-0423708119ae?auto=format&fit=crop&q=80&w=1200&h=400)
+
+## ✨ Tính Năng Nổi Bật
+
+### 1. 📅 Lịch Vạn Niên & Xem Ngày Tốt Xấu
+*   Tra cứu ngày âm dương chuẩn xác theo thuật toán Hồ Ngọc Đức.
+*   Phân loại ngày **Hoàng Đạo** (Tốt) và **Hắc Đạo** (Xấu) trực quan.
+*   Highlight ngày Hắc Đạo bằng tông màu đỏ nhạt (`rose`) tinh tế để dễ dàng nhận diện và tránh đại sự.
+*   Xem chi tiết giờ hoàng đạo, hướng xuất hành và các việc nên làm/kiêng kỵ.
+
+### 2. 🧭 La Bàn Bát Trạch Tương Tác
+*   Tự động tính toán **Cung Phi** và **Bản Mệnh** (Đông/Tây Tứ Mệnh) dựa trên năm sinh và giới tính.
+*   La bàn ảo 3D xoay chuẩn xác tới từng vĩ độ theo cung mệnh người dùng.
+*   Chỉ dẫn các hướng đại cát (Sinh Khí, Diên Niên...) và hướng đại kỵ (Tuyệt Mệnh, Ngũ Quỷ...).
+
+### 3. ⚖️ Cân Xương Đoán Số
+*   Thuật toán tính toán "Lượng Chỉ" tự động từ ngày giờ sinh.
+*   Bình giải chi tiết về mức độ phú quý, bần hàn và vận mệnh trọn đời qua văn phong cổ điển được hiện đại hóa.
+*   Giao diện phân cấp độ mệnh bằng Badge màu sắc sang trọng.
+
+### 4. 🔮 Bát Tự Tứ Trụ & Radar Ngũ Hành
+*   Lập lá số Bát Tự chuyên sâu (Can Chi của Năm, Tháng, Ngày, Giờ sinh).
+*   **Biểu đồ Radar Ngũ Hành:** Phân tích trực quan trạng thái Khuyết - Vượng của Kim, Mộc, Thủy, Hỏa, Thổ.
+*   Tư vấn **Dụng Thần** cải vận: Gợi ý màu sắc, nghề nghiệp để cân bằng năng lượng bản mệnh.
+
+### 5. ❤️ Xem Tuổi Tương Hợp
+*   Đối chiếu nhân duyên giữa hai người dựa trên Thiên Can, Địa Chi và Cung Phi.
+*   Chấm điểm tương hợp (%) và đưa ra lời khuyên chi tiết cho đời sống hôn nhân hoặc đối tác làm ăn.
+
+### 6. ☀️ Dashboard "An Mệnh Hàng Ngày"
+*   Cá nhân hóa trải nghiệm ngay từ trang chủ.
+*   Thông điệp may mắn, chỉ số năng lượng, hướng xuất hành và màu sắc hợp mệnh thay đổi theo từng ngày dành riêng cho bạn.
 
 ---
 
-## 1. Tổng quan dự án (Project Overview)
-**Mục tiêu:** Xây dựng một ứng dụng web hiện đại, kết hợp các yếu tố Tử vi Đông Phương (Bát tự, Cân xương), Phong thủy ứng dụng và Lịch xem ngày tốt xấu. Sản phẩm hướng tới việc mang lại trải nghiệm cá nhân hóa, giao diện trực quan, tính thẩm mỹ cao và dễ sử dụng cho người dùng Việt Nam.
+## 🎨 Ngôn Ngữ Thiết Kế (Zen UI)
 
-**Vấn đề giải quyết:** Phần lớn các trang web tử vi hiện nay tại Việt Nam có giao diện cũ, nhồi nhét thông tin, khó sử dụng trên thiết bị di động, và thiết kế kém bắt mắt. Ứng dụng này sẽ đơn giản hóa các khái niệm học thuật, trình bày dữ liệu dạng đồ họa trực quan và cải thiện UX.
-
-## 2. Nghiên cứu thị trường & Bối cảnh (Market & Context)
-- **Thị trường hiện tại:** Nhu cầu tra cứu tử vi, ngày tốt xấu và phong thủy là rất lớn, đặc biệt vào các dịp lễ tết, khởi sự kinh doanh hay xây dựng.
-- **Đối thủ cạnh tranh:** AItuvi (ứng dụng AI), Tuvi.vn, Lịch Ngày Tốt, Huyenbi.net.
-- **Phân tích USP (Unique Selling Proposition):** 
-  - Thay vì chỉ cung cấp văn bản đơn thuần, ứng dụng sẽ biểu diễn các chỉ số bằng biểu đồ (VD: Radar chart ngũ hành).
-  - Áp dụng UI/UX hiện đại: Dark mode vũ trụ hoặc Light mode thiền định (Spiritual UI). Cấu trúc "Progressive Disclosure" (hiển thị thông tin từng bước tránh ngợp dữ liệu).
-
-## 3. Kiến trúc Tính năng (Feature Architecture)
-
-### 3.1. Nhóm tính năng cốt lõi (Core Features)
-
-**A. Tử vi cá nhân & Bát tự (Tứ trụ)**
-- Form nhập liệu mượt mà: Tên, Giới tính, Giờ, Ngày, Tháng, Năm sinh (Dương lịch/Âm lịch).
-- Đổi ngày Dương lịch sang Âm lịch tự động.
-- Sinh lá số Bát Tự (Thiên Can, Địa Chi cho 4 trụ).
-- Biểu đồ phân tích rập khuôn Ngũ Hành (Kim, Mộc, Thủy, Hỏa, Thổ đang Khuyết hay Vượng).
-- Luận giải cơ bản về tính cách và vận mệnh.
-
-**B. Cân xương đoán số**
-- Tính toán "Lượng Chỉ" tự động dựa trên ngày giờ sinh.
-- Hiển thị kết quả bằng giao diện trực quan (hình ảnh cán cân, hoặc animation đồng tiền).
-- Đoạn văn bình giải tổng quan về mức độ thuận lợi, tài lộc trong cuộc đời theo kết quả Lượng Chỉ.
-
-**C. Xem ngày tốt xấu & Lịch Vạn Niên**
-- Giao diện lịch tháng (Calendar view) kết hợp ngày Âm/Dương.
-- Đánh dấu các ngày Hoàng Đạo/Hắc Đạo bằng icon màu sắc rực rỡ.
-- Xem chi tiết ngày: Giờ đẹp, Hướng xuất hành tốt, Tuổi xung khắc.
-- **Tính năng lọc:** Tìm ngày tốt theo mục đích (vd: chỉ lọc ngày tốt để Khai trương, Cưới hỏi, Động thổ trong tháng).
-
-**D. Phong thủy ứng dụng & Hướng nhà**
-- Dựa vào năm sinh và giới tính, tính cung phi (Bát Trạch).
-- La bàn phong thủy điện tử (ảo) minh họa các hướng: Sinh Khí, Thiên Y, Diên Niên, Phục Vị (Tốt) & Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Họa Hại (Xấu).
-- Ứng dụng thực tế: Gợi ý hướng kê giường ngủ, hướng bàn làm việc.
-
-### 3.2. Tính năng tương tác (Engagement Features)
-
-**E. Xem tuổi kết hôn / Đối tác**
-- Nhập thông tin của 2 đối tượng.
-- Hệ thống phân tích đối chiếu Thiên can, Địa chi, Ngũ hành nạp âm.
-- Đưa ra "Điểm tương hợp" (%) và lời khuyên.
-
-**F. Tử vi hàng ngày (Daily Horoscope) - Mở rộng**
-- Lời khuyên ngắn hạn và thông điệp may mắn ngẫu nhiên (lucky numbers, màu sắc may mắn trong ngày).
-
-## 4. Yêu cầu Giao diện & Trải nghiệm Người dùng (UI/UX)
-- **Aesthetics (Thẩm mỹ):** 
-  - Phong cách "Mystical Modern" (Giao diện tối - Dark mode với các ánh sáng Neon gradient biểu tượng vũ trụ/chiêm tinh).
-  - HOẶC "Zen Minimal" (Giao diện sáng - Background beige/off-white, Typography thanh lịch kết hợp font serif cho tiêu đề).
-- **Typography:** Sử dụng font chữ hiện đại, sang trọng như *Inter, Playfair Display* hoặc *Cormorant Garamond* để tạo điểm nhấn truyền thống nhưng vẫn cao cấp.
-- **Animations:** Micro-animations khi hover, chuyển trang mượt mà bằng Framer Motion. Animation load dữ liệu hình Bát Quái hoặc Vòng xoay Ngũ Hành.
-- **Mobile First:** Thiết kế dành cho màn hình cảm ứng, bottom sheet navigation, các nút lớn dễ chạm.
-
-## 5. Yêu cầu Kỹ thuật (Technical Specifications)
-- **Frontend Framework:** Next.js (App Router) - Bắt buộc để tối ưu SEO và Core Web Vitals.
-- **Language:** TypeScript - Đảm bảo tính chặt chẽ của mã nguồn và dễ bảo trì.
-- **Tối ưu SEO:** Sử dụng Metadata API của Next.js, Server Component để render nội dung tử vi giúp Google Index tốt nhất.
-- **Styling:** TailwindCSS.
-- **Deployment:** Vercel hoặc các nền tảng hỗ trợ Next.js SSR.
-- **Database Architecture (MVP):** Hoạt động hoàn toàn Client-side (Local Storage) để người dùng không cần đăng nhập vẫn lưu được profile. Đối với bản v2, có thể dùng Supabase/Firebase.
-
-## 6. Lộ trình phát triển (Phased Implementation)
-- **Giai đoạn 1 (Foundation):** 
-  - Setup core Layout & UI design system (Vite + React / Tailwind).
-  - Tính năng Lịch Vạn Niên (Xem ngày tốt xấu).
-  - Tính năng Cân Xương Đoán Số.
-- **Giai đoạn 2 (SEO & Migration):**
-  - Chuyển đổi mã nguồn sang Next.js (App Router) và TypeScript.
-  - Fix duplicate files, tối ưu Server-side Rendering và meta data.
-  - Xây dựng Tính năng xác định Hướng nhà cơ bản (Bát Trạch).
-- **Giai đoạn 3 (Premium UX & Personalization) - HIỆN TẠI ĐÃ HOÀN THÀNH:**
-  - Cá nhân hóa người dùng: Sử dụng LocalStorage (User Context) để lưu trữ tên, ngày sinh, đồng bộ qua các luồng (Lịch, Cân Xương, Bát Trạch).
-  - Nâng cấp UI/UX: Áp dụng hiệu ứng mượt mà (Framer Motion) và La bàn xoay trực quan.
-  - Hỗ trợ hoàn toàn Dark Mode theo ngôn ngữ thiết kế Zen.
-  - Cập nhật luận giải chi tiết cho Cân Xương Đoán Số.
-- **Giai đoạn 4 (Tiếp theo):**
-  - Xây dựng module Bát Tự phức tạp và biểu đồ phân tích Ngũ Hành.
-  - Tính năng Xem tuổi tương hợp đôi lứa.
-  - Tích hợp nội dung tử vi hàng ngày.
+An Mệnh được xây dựng trên triết lý thiết kế **Zen (Thiền)**:
+*   **Mystical Modern (Dark Mode):** Không gian huyền bí với hiệu ứng Gradient Neon và Glassmorphism.
+*   **Zen Minimal (Light Mode):** Thanh lịch, nhẹ nhàng với độ tương phản cao, chữ sắc nét, mang lại cảm giác an yên.
+*   **Premium Experience:** Sử dụng `Framer Motion` cho các chuyển động mượt mà, la bàn xoay sống động và hiệu ứng nền kính mờ nghệ thuật.
 
 ---
-*Dự án hiện tại đã đạt độ ổn định và trải nghiệm người dùng cao, hoàn thành Phase 3 và sẵn sàng triển khai thực tế.*
+
+## 🚀 Công Nghệ Sử Dụng
+
+*   **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **Animations:** [Framer Motion](https://www.framer.com/motion/)
+*   **Icons:** [Lucide React](https://lucide.dev/)
+*   **Storage:** LocalStorage (Client-side Persistence) với hệ thống migration key thông minh.
+
+---
+
+## 🛠️ Hướng Dẫn Cài Đặt
+
+1.  **Clone dự án:**
+    ```bash
+    git clone https://github.com/your-repo/anmenh.git
+    cd anmenh
+    ```
+
+2.  **Cài đặt dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Chạy môi trường phát triển:**
+    ```bash
+    npm run dev
+    ```
+    Mở [http://localhost:3000](http://localhost:3000) để xem kết quả.
+
+4.  **Build sản phẩm:**
+    ```bash
+    npm run build
+    ```
+
+---
+
+## 📜 Giấy Phép & Bản Quyền
+
+© 2026 **An Mệnh**. Phát triển bởi đội ngũ đam mê văn hóa Phương Đông và công nghệ hiện đại. Mọi thuật toán lịch pháp dựa trên quy tắc chuẩn của chuyên gia Hồ Ngọc Đức.
+
+---
+*Dự án hướng tới việc mang lại giá trị tâm linh tích cực và giúp mọi người thấu hiểu bản thân hơn qua lăng kính thuật số.*

@@ -29,7 +29,7 @@ const COMPASS_POINTS = [
 
 export default function BatTrach() {
   const { profile } = useUser();
-  const [year, setYear] = useState(1990);
+  const [year, setYear] = useState<number | "">(1990);
   const [gender, setGender] = useState<"male" | "female">("male");
   const [result, setResult] = useState<BatTrachResult | null>(null);
   const [hoveredDir, setHoveredDir] = useState<string | null>(null);
@@ -42,8 +42,10 @@ export default function BatTrach() {
   }, [profile]);
 
   const handleCalculate = useCallback(() => {
-    const res = calculateBatTrach(year, gender);
-    setResult(res);
+    if (typeof year === "number" && year >= 1900 && year <= 2030) {
+      const res = calculateBatTrach(year, gender);
+      setResult(res);
+    }
   }, [year, gender]);
 
   const isGoodDirection = (label: string) => {
@@ -104,17 +106,21 @@ export default function BatTrach() {
           <div className="space-y-5">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
-                Năm sinh (Dương lịch)
+                Năm sinh (Âm lịch)
               </label>
               <input
                 type="number"
                 min={1900}
-                max={2020}
-                value={year || ""}
-                onChange={(e) => setYear(parseInt(e.target.value) || 0)}
+                max={2030}
+                value={year === "" ? "" : year}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === "") setYear("");
+                  else setYear(parseInt(val));
+                }}
                 className="w-full bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all dark:text-stone-100"
               />
-              {year >= 1900 && year <= 2020 && (
+              {typeof year === 'number' && year >= 1900 && year <= 2030 && (
                 <p className="mt-1.5 text-xs text-amber-600 dark:text-amber-400 font-medium">
                   {getYearCanChi(year)}
                 </p>
@@ -142,7 +148,8 @@ export default function BatTrach() {
 
             <button
               onClick={handleCalculate}
-              className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2 group"
+              disabled={year === "" || year < 1900 || year > 2030}
+              className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2 group disabled:opacity-50"
             >
               Tra Cứu Hướng <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
             </button>

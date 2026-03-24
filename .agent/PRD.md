@@ -78,3 +78,12 @@
   - Cải thiện Lịch (làm rõ ngày Hắc đạo so với ngày thường).
   - Đồng bộ UI trang Bát tự và Hợp tuổi với Toàn hệ thống.
   - Xác minh lại thuật toán La Bàn Bát Trạch.
+- **Giai đoạn 6 (Chuẩn bị Mobile App & Core Fixes):** [TIẾP THEO]
+  - Xây dựng hệ thống UI/UX nhận diện: Tạo Logo, ICO cho dự án.
+  - Luồng Mobile App (Tải App): Nút "Tải App" bật Modal báo "Đang phát triển", kèm Form đăng ký email (Waitlist) làm Tester nội bộ trên Google Play.
+  - Bổ sung nội dung hệ thống: Xây dựng các trang tĩnh "Về chúng tôi", "Điều khoản", "Bảo mật".
+  - Bát Tự: Kiểm tra và sửa lỗi thuật toán đổi Can Chi cho Trụ Ngày.
+  - Cân Xương: Hiển thị rõ Âm/Dương lịch, format layout chọn Ngày/Tháng/Năm thân thiện với người Việt, thêm validate, fix lỗi độ chính xác cân lượng.
+  - Tương Hợp: Label Năm sinh Âm Lịch, sửa UX (xóa input ko về 0 mà về trống), thêm validate năm sinh, auto-toggle giới tính (Người 1 Nam -> Người 2 Nữ).
+  - Bát Trạch: Label Năm sinh Âm Lịch, thêm validate năm sinh.
+  - Hồ sơ cá nhân (Trang chủ tĩnh): Định hướng năm sinh là Âm lịch, fix bug xóa sạch input phải nhảy về default year thay vì lỗi.

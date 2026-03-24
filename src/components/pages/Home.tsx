@@ -14,7 +14,7 @@ export default function Home() {
   const { profile, saveProfile, clearProfile } = useUser();
   const [showSetup, setShowSetup] = useState(false);
   const [nameInput, setNameInput] = useState("");
-  const [birthYearInput, setBirthYearInput] = useState(1990);
+  const [birthYearInput, setBirthYearInput] = useState<number | "">(1990);
   const [genderInput, setGenderInput] = useState<"male" | "female">("male");
   const [dailyLuck, setDailyLuck] = useState<ReturnType<typeof getDailyLuck> | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -39,12 +39,13 @@ export default function Home() {
   }, [showSetup, profile]);
 
   const handleSave = () => {
-    if (nameInput.trim() && birthYearInput >= 1900 && birthYearInput <= 2020) {
+    const finalYear = typeof birthYearInput === "number" ? birthYearInput : 1990;
+    if (nameInput.trim() && finalYear >= 1900 && finalYear <= 2030) {
       saveProfile({
         name: nameInput.trim(),
-        birthYear: birthYearInput,
+        birthYear: finalYear,
         gender: genderInput,
-        birthDate: `${birthYearInput}-01-01`,
+        birthDate: `${finalYear}-01-01`,
       });
       setShowSetup(false);
     }
@@ -308,18 +309,22 @@ export default function Home() {
                 {/* Birth Year */}
                 <div>
                   <label htmlFor="profile-birthyear" className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
-                    Năm sinh (Dương lịch)
+                    Năm sinh (Âm lịch)
                   </label>
                   <input
                     id="profile-birthyear"
                     type="number"
                     min={1900}
-                    max={2020}
-                    value={birthYearInput}
-                    onChange={(e) => setBirthYearInput(parseInt(e.target.value) || 1990)}
+                    max={2030}
+                    value={birthYearInput === "" ? "" : birthYearInput}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === "") setBirthYearInput("");
+                      else setBirthYearInput(parseInt(val));
+                    }}
                     className="w-full bg-stone-50 dark:bg-stone-800 border border-stone-100 dark:border-stone-600 rounded-2xl px-6 py-4 focus:border-amber-500 outline-none transition-all text-base dark:text-stone-100"
                   />
-                  {birthYearInput >= 1900 && birthYearInput <= 2020 && (
+                  {typeof birthYearInput === 'number' && birthYearInput >= 1900 && birthYearInput <= 2030 && (
                     <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
                       Năm {birthYearInput} • {getYearCanChi(birthYearInput)}
                     </p>
@@ -367,7 +372,7 @@ export default function Home() {
                   </button>
                   <button
                     onClick={handleSave}
-                    disabled={!nameInput.trim() || birthYearInput < 1900 || birthYearInput > 2020}
+                    disabled={!nameInput.trim() || birthYearInput === "" || birthYearInput < 1900 || birthYearInput > 2030}
                     className="flex-[2] btn-zen py-4 text-sm font-bold tracking-widest disabled:opacity-40"
                   >
                     Bắt đầu ✦

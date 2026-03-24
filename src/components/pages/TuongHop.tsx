@@ -8,10 +8,10 @@ import { useUser } from "@/context/UserContext";
 
 export default function TuongHop() {
   const { profile } = useUser();
-  const [year1, setYear1] = useState(1995);
+  const [year1, setYear1] = useState<number | "">(1995);
   const [gender1, setGender1] = useState<"male" | "female">("male");
 
-  const [year2, setYear2] = useState(1997);
+  const [year2, setYear2] = useState<number | "">(1997);
   const [gender2, setGender2] = useState<"male" | "female">("female");
 
   const [result, setResult] = useState<TuongHopResult | null>(null);
@@ -25,8 +25,20 @@ export default function TuongHop() {
     }
   }, [profile]);
 
+  const handleGender1Change = (g: "male" | "female") => {
+    setGender1(g);
+    setGender2(g === "male" ? "female" : "male");
+  };
+
+  const handleGender2Change = (g: "male" | "female") => {
+    setGender2(g);
+    setGender1(g === "male" ? "female" : "male");
+  };
+
   const handleCalculate = () => {
-    setResult(calculateTuongHop(year1, gender1, year2, gender2));
+    if (typeof year1 === "number" && typeof year2 === "number") {
+      setResult(calculateTuongHop(year1, gender1, year2, gender2));
+    }
   };
 
   const getScoreColor = (score: number) => {
@@ -68,16 +80,20 @@ export default function TuongHop() {
             </h3>
             <div className="space-y-6">
               <div>
-                <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Năm sinh</label>
+                <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Năm sinh (Âm lịch)</label>
                 <input
                   type="number"
                   min="1900"
                   max={currentYear}
-                  value={year1}
-                  onChange={(e) => setYear1(Number(e.target.value))}
+                  value={year1 === "" ? "" : year1}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "") setYear1("");
+                    else setYear1(Number(val));
+                  }}
                   className="w-full bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
-                {year1 >= 1900 && year1 <= currentYear && (
+                {typeof year1 === 'number' && year1 >= 1900 && year1 <= currentYear && (
                   <p className="text-xs text-amber-600 dark:text-amber-500 mt-1 font-medium">
                     {getYearCanChi(year1)}
                   </p>
@@ -87,13 +103,13 @@ export default function TuongHop() {
                 <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Giới tính</label>
                 <div className="flex gap-3">
                   <button 
-                    onClick={() => setGender1("male")}
+                    onClick={() => handleGender1Change("male")}
                     className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender1 === "male" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nam
                   </button>
                   <button 
-                    onClick={() => setGender1("female")}
+                    onClick={() => handleGender1Change("female")}
                     className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender1 === "female" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nữ
@@ -110,16 +126,20 @@ export default function TuongHop() {
             </h3>
             <div className="space-y-6">
               <div>
-                <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Năm sinh</label>
+                <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Năm sinh (Âm lịch)</label>
                 <input
                   type="number"
                   min="1900"
                   max={currentYear}
-                  value={year2}
-                  onChange={(e) => setYear2(Number(e.target.value))}
+                  value={year2 === "" ? "" : year2}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "") setYear2("");
+                    else setYear2(Number(val));
+                  }}
                   className="w-full bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-600 rounded-xl px-4 py-3 text-stone-900 dark:text-white focus:outline-none focus:border-amber-500/50 transition-colors"
                 />
-                {year2 >= 1900 && year2 <= currentYear && (
+                {typeof year2 === 'number' && year2 >= 1900 && year2 <= currentYear && (
                   <p className="text-xs text-amber-600 dark:text-amber-500 mt-1 font-medium">
                     {getYearCanChi(year2)}
                   </p>
@@ -129,13 +149,13 @@ export default function TuongHop() {
                 <label className="block text-xs font-black uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-2">Giới tính</label>
                 <div className="flex gap-3">
                   <button 
-                    onClick={() => setGender2("male")}
+                    onClick={() => handleGender2Change("male")}
                     className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender2 === "male" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nam
                   </button>
                   <button 
-                    onClick={() => setGender2("female")}
+                    onClick={() => handleGender2Change("female")}
                     className={`flex-1 py-3 rounded-xl border-2 font-bold transition-all text-sm ${gender2 === "female" ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900" : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"}`}
                   >
                     Nữ
@@ -148,7 +168,8 @@ export default function TuongHop() {
 
         <button
           onClick={handleCalculate}
-          className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2"
+          disabled={year1 === "" || year2 === "" || year1 < 1900 || year1 > currentYear || year2 < 1900 || year2 > currentYear}
+          className="w-full btn-zen py-4 text-sm font-bold tracking-widest flex items-center justify-center gap-2 disabled:opacity-50"
         >
           <Heart size={18} />
           XEM TƯƠNG HỢP

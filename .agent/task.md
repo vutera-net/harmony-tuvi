@@ -23,3 +23,12 @@
   - [x] Đồng bộ phong cách UI Bát tự & Hợp tuổi
   - [x] Xác minh thuật toán La Bàn Bát Trạch
   - [x] Rebranding sang "An Mệnh" và cập nhật LocalStorage key
+- [ ] Phase 6: Core Fixes & App Preparation
+  - [ ] Tạo logo, ico
+  - [x] Phát triển tính năng Nút "Tải App" (Waitlist Test App Google Play)
+  - [x] Xây dựng: Trang About, Terms, Privacy
+  - [x] Home Profile: Nhãn Âm lịch, fix UX xóa empty input
+  - [ ] Lỗi Bát Tự: Kiểm tra logic quy đổi Can Chi Trụ Ngày
+  - [ ] Lỗi Cân Xương: Hiển thị Âm/Dương lịch rõ ràng, Layout Date -> Month, Validate năm sinh, Kiểm tra thuật toán cân lượng
+  - [ ] Lỗi Tương Hợp: Nhãn Âm Lịch, Fix UX bug số 0 khi xóa, Validate năm sinh, Auto switch gender
+  - [ ] Lỗi Bát Trạch: Nhãn Âm Lịch, Validate năm sinh
