@@ -56,10 +56,11 @@ export default function BatTu() {
       <div className="bg-white/90 dark:bg-stone-800/80 backdrop-blur-md p-6 md:p-8 rounded-[2rem] border-2 border-stone-100 dark:border-stone-700 shadow-xl shadow-stone-900/5 mb-10 mx-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
-            <label className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
+            <label htmlFor="battu-date" className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
               <Calendar size={16} /> Ngày sinh (Dương lịch)
             </label>
             <input
+              id="battu-date"
               type="date"
               value={dateStr}
               onChange={(e) => setDateStr(e.target.value)}
@@ -67,10 +68,11 @@ export default function BatTu() {
             />
           </div>
           <div>
-            <label className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
+            <label htmlFor="battu-time" className="block text-sm font-bold text-stone-500 dark:text-stone-400 mb-2 flex items-center gap-2">
               <Clock size={16} /> Giờ sinh
             </label>
             <input
+              id="battu-time"
               type="time"
               value={timeStr}
               onChange={(e) => setTimeStr(e.target.value)}

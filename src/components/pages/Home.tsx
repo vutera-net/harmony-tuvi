@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import {
-  ArrowRight, Sparkles, Moon, Sun, Scale, Compass,
+  ArrowRight, Sparkles, Moon, Sun, Compass,
   UserCircle2, Edit3, Star, Wind, Droplets, Flame,
-  TreePine, CircleDot, Heart
+  TreePine, CircleDot
 } from "lucide-react";
 import Link from "next/link";
 import { useUser } from "@/context/UserContext";
@@ -103,8 +103,8 @@ export default function Home() {
           giúp bạn đón lành tránh dữ và cân bằng dòng năng lượng trong cuộc sống.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/can-xuong" className="btn-zen flex items-center justify-center gap-2 group px-8 py-3">
-            Xem tử vi trọn đời <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          <Link href="/tu-vi" className="btn-zen flex items-center justify-center gap-2 group px-8 py-3">
+            Luận giải bản mệnh <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link href="/bat-trach" className="px-8 py-3 rounded-full border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
             Khám phá Phong thủy
@@ -212,7 +212,7 @@ export default function Home() {
       )}
 
       {/* Feature Cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
         <FeatureCard
           href="/calendar"
           icon={<Moon className="text-amber-600" />}
@@ -221,32 +221,19 @@ export default function Home() {
           color="from-blue-50 to-indigo-50 dark:from-stone-800 dark:to-stone-800"
         />
         <FeatureCard
-          href="/can-xuong"
-          icon={<Scale className="text-amber-600" />}
-          title="Cân Xương Đoán Số"
-          desc="Luận đoán sang hèn qua lượng chỉ ngày giờ sinh."
+          href="/tu-vi"
+          icon={<Sparkles className="text-amber-600" />}
+          title="Luận Giải Tử Vi"
+          desc="Bát Tự Tứ Trụ, Cân Xương Đoán Số và Xem Tuổi Tương Hợp."
           color="from-amber-50 to-orange-50 dark:from-stone-800 dark:to-stone-800"
+          badge="3 tính năng"
         />
         <FeatureCard
           href="/bat-trach"
           icon={<Compass className="text-amber-600" />}
-          title="Bát Trạch"
+          title="Bát Trạch Phong Thủy"
           desc="Tối ưu hướng nhà, hướng bếp cho gia chủ thịnh vượng."
           color="from-green-50 to-emerald-50 dark:from-stone-800 dark:to-stone-800"
-        />
-        <FeatureCard
-          href="/bat-tu"
-          icon={<Sparkles className="text-amber-600" />}
-          title="Bát Tự Tứ Trụ"
-          desc="Phân tích vượng khuyết bản mệnh qua lá số Tử Bình."
-          color="from-rose-50 to-pink-50 dark:from-stone-800 dark:to-stone-800"
-        />
-        <FeatureCard
-          href="/tuong-hop"
-          icon={<Heart className="text-amber-600" />}
-          title="Xem Hợp Tuổi"
-          desc="Kết hợp Can Chi, Cung phi để luận đoán nhân duyên."
-          color="from-purple-50 to-fuchsia-50 dark:from-stone-800 dark:to-stone-800"
         />
       </section>
 
@@ -285,7 +272,11 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-stone-900/50 backdrop-blur-sm flex items-center justify-center p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-label={profile ? "Chỉnh sửa hồ sơ" : "Tạo hồ sơ mới"}
             onClick={(e) => e.target === e.currentTarget && setShowSetup(false)}
+            onKeyDown={(e) => e.key === "Escape" && setShowSetup(false)}
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
@@ -303,8 +294,9 @@ export default function Home() {
               <div className="space-y-5">
                 {/* Name */}
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">Họ và tên</label>
+                  <label htmlFor="profile-name" className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">Họ và tên</label>
                   <input
+                    id="profile-name"
                     type="text"
                     placeholder="Nguyễn Văn An"
                     value={nameInput}
@@ -315,10 +307,11 @@ export default function Home() {
 
                 {/* Birth Year */}
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
+                  <label htmlFor="profile-birthyear" className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">
                     Năm sinh (Dương lịch)
                   </label>
                   <input
+                    id="profile-birthyear"
                     type="number"
                     min={1900}
                     max={2020}
@@ -335,10 +328,11 @@ export default function Home() {
 
                 {/* Gender */}
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2">Giới tính</label>
-                  <div className="flex gap-3">
+                  <label className="text-xs font-bold uppercase tracking-widest text-stone-400 block mb-2" id="gender-label">Giới tính</label>
+                  <div className="flex gap-3" role="group" aria-labelledby="gender-label">
                     <button
                       onClick={() => setGenderInput("male")}
+                      aria-pressed={genderInput === "male"}
                       className={`flex-1 py-3 rounded-2xl border-2 font-medium transition-all ${genderInput === "male"
                         ? "bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 border-stone-900 dark:border-stone-100"
                         : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"
@@ -346,6 +340,7 @@ export default function Home() {
                     >Nam</button>
                     <button
                       onClick={() => setGenderInput("female")}
+                      aria-pressed={genderInput === "female"}
                       className={`flex-1 py-3 rounded-2xl border-2 font-medium transition-all ${genderInput === "female"
                         ? "bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 border-stone-900 dark:border-stone-100"
                         : "bg-stone-50 dark:bg-stone-800 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300"

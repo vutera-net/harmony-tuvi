@@ -113,7 +113,7 @@ export default function Calendar() {
                 ? key === "good"
                   ? "bg-amber-600 text-white shadow-md"
                   : key === "bad"
-                  ? "bg-stone-700 text-white shadow-md"
+                  ? "bg-rose-600 text-white shadow-md"
                   : "bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 shadow-md"
                 : "bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300 hover:border-amber-300"
             }`}
@@ -131,7 +131,7 @@ export default function Calendar() {
           <span className="text-stone-500 dark:text-stone-400">Hoàng Đạo</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-sm bg-stone-100 border border-stone-400" />
+          <div className="w-3 h-3 rounded-sm bg-rose-100 border border-rose-400" />
           <span className="text-stone-500 dark:text-stone-400">Hắc Đạo</span>
         </div>
         <div className="flex items-center gap-1.5">
@@ -171,7 +171,11 @@ export default function Calendar() {
             return (
               <div
                 key={d.solar}
+                role="button"
+                tabIndex={dimmed ? -1 : 0}
+                aria-label={`Ngày ${d.solar}, âm lịch ${d.lunar}/${d.lunarMonth}${d.isHoangDao ? ", Hoàng Đạo" : ""}${d.isHacDao ? ", Hắc Đạo" : ""}`}
                 onClick={() => !dimmed && setSelectedDay(d)}
+                onKeyDown={(e) => { if (!dimmed && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); setSelectedDay(d); } }}
                 className={`h-20 sm:h-28 border-b border-r border-stone-100 dark:border-stone-700/50 p-2 sm:p-3 transition-all flex flex-col justify-between cursor-pointer group ${
                   dimmed ? "opacity-20 pointer-events-none" : "hover:bg-amber-50/50 dark:hover:bg-amber-900/10"
                 } ${d.isHoangDao ? "bg-amber-50/30 dark:bg-amber-950/10" : ""} ${
@@ -184,7 +188,7 @@ export default function Calendar() {
                       d.isHoangDao
                         ? "text-amber-600 dark:text-amber-400"
                         : d.isHacDao
-                        ? "text-stone-400 dark:text-stone-500"
+                        ? "text-rose-400 dark:text-rose-500"
                         : "text-stone-900 dark:text-stone-100"
                     } ${
                       d.isToday
@@ -208,7 +212,7 @@ export default function Calendar() {
                     </div>
                   )}
                   {d.isHacDao && !d.isHoangDao && (
-                    <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-stone-400 dark:text-stone-500 font-medium uppercase truncate">
+                    <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-rose-400 dark:text-rose-500 font-medium uppercase truncate">
                       <Moon size={9} />
                       <span className="hidden sm:inline">Hắc Đạo</span>
                     </div>
@@ -228,7 +232,11 @@ export default function Calendar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-stone-900/50 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Chi tiết ngày ${selectedDay?.solar}`}
             onClick={(e) => e.target === e.currentTarget && setSelectedDay(null)}
+            onKeyDown={(e) => e.key === "Escape" && setSelectedDay(null)}
           >
             <motion.div
               initial={{ y: 60, opacity: 0 }}
@@ -262,7 +270,7 @@ export default function Calendar() {
                   selectedDay.isHoangDao
                     ? "bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900/50"
                     : selectedDay.isHacDao
-                    ? "bg-stone-50 dark:bg-stone-700/50 border border-stone-100 dark:border-stone-600"
+                    ? "bg-rose-50 dark:bg-rose-950/20 border border-rose-100 dark:border-rose-900/50"
                     : "bg-stone-50 dark:bg-stone-700/50 border border-stone-100 dark:border-stone-600"
                 }`}>
                   {selectedDay.isHoangDao ? (
@@ -271,7 +279,7 @@ export default function Calendar() {
                     <Moon className="text-stone-500 shrink-0" size={22} />
                   )}
                   <div>
-                    <p className={`font-bold ${selectedDay.isHoangDao ? "text-amber-700 dark:text-amber-400" : "text-stone-600 dark:text-stone-300"}`}>
+                    <p className={`font-bold ${selectedDay.isHoangDao ? "text-amber-700 dark:text-amber-400" : selectedDay.isHacDao ? "text-rose-600 dark:text-rose-400" : "text-stone-600 dark:text-stone-300"}`}>
                       {selectedDay.isHoangDao ? "Ngày Hoàng Đạo ✦ Đại Lành" : selectedDay.isHacDao ? "Ngày Hắc Đạo · Nên Hạn Chế" : "Ngày Bình Thường"}
                     </p>
                     <p className="text-xs text-stone-400 dark:text-stone-500 mt-0.5">
