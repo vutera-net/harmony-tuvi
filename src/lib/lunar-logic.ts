@@ -9,7 +9,6 @@
 // ==========================================
 export const CAN = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
 export const CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
-export const HANH = ["Kim", "Thủy", "Hỏa", "Mộc", "Thổ"];
 
 export function getYearCanChi(year: number): string {
   const canIndex = (year + 6) % 10;

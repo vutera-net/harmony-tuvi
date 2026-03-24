@@ -90,7 +90,7 @@ export default function Home() {
 
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-6">
           <Sparkles size={14} />
-          <span>Vận trình 2026 Bính Ngọ</span>
+          <span>Vận trình {today.getFullYear()} {getYearCanChi(today.getFullYear())}</span>
         </div>
 
         <h2 className="text-5xl md:text-7xl font-serif font-bold text-stone-950 dark:text-stone-50 mb-6 leading-[1.1]">

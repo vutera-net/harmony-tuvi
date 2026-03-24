@@ -4,38 +4,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import { calculateBatTu, BatTuResult } from "@/lib/battu-logic";
 import RadarChart from "../RadarChart";
 import { Sparkles, Calendar, Clock, RefreshCw } from "lucide-react";
+import { useUser } from "@/context/UserContext";
 
 export default function BatTu() {
+  const { profile } = useUser();
   const [dateStr, setDateStr] = useState("1995-05-15");
   const [timeStr, setTimeStr] = useState("08:30");
   const [result, setResult] = useState<BatTuResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
   useEffect(() => {
-    const savedProfile = localStorage.getItem("anmenh_profile") || localStorage.getItem("tuvi_profile");
-    if (savedProfile) {
-      try {
-        const p = JSON.parse(savedProfile);
-        if (p.year && p.month && p.day) {
-          setDateStr(`${p.year}-${String(p.month).padStart(2, '0')}-${String(p.day).padStart(2, '0')}`);
-        }
-      } catch (e) {}
+    if (profile?.birthYear) {
+      setDateStr(`${profile.birthYear}-01-01`);
     }
-  }, []);
+  }, [profile]);
 
   const handleCalculate = () => {
     if (!dateStr || !timeStr) return;
     setIsCalculating(true);
-    
-    setTimeout(() => {
-      const [y, m, d] = dateStr.split("-").map(Number);
-      const [hr, min] = timeStr.split(":").map(Number);
-      const dateObj = new Date(y, m - 1, d, hr, min);
-      
-      const res = calculateBatTu(dateObj);
-      setResult(res);
-      setIsCalculating(false);
-    }, 600);
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const [hr, min] = timeStr.split(":").map(Number);
+    const dateObj = new Date(y, m - 1, d, hr, min);
+    setResult(calculateBatTu(dateObj));
+    setIsCalculating(false);
   };
 
   const hanhColors: Record<string, string> = {
