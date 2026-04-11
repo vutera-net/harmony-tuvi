@@ -10,6 +10,10 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 export const metadata: Metadata = {
   title: "An Mệnh - Thấu Hiểu Vận Mệnh, Kiến Tạo Bình An",
   description: "Ứng dụng xem tử vi, phong thủy, lịch vạn niên hiện đại theo phong cách Zen.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/logo.svg",
+  },
 };
 
 import { UserProvider } from "@/context/UserContext";

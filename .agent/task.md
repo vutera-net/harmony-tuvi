@@ -23,8 +23,8 @@
   - [x] Đồng bộ phong cách UI Bát tự & Hợp tuổi
   - [x] Xác minh thuật toán La Bàn Bát Trạch
   - [x] Rebranding sang "An Mệnh" và cập nhật LocalStorage key
-- [ ] Phase 6: Core Fixes & App Preparation
-  - [ ] Tạo logo, ico
+- [x] Phase 6: Core Fixes & App Preparation
+  - [x] Tạo logo, ico
   - [x] Phát triển tính năng Nút "Tải App" (Waitlist Test App Google Play)
   - [x] Xây dựng: Trang About, Terms, Privacy
   - [x] Home Profile: Nhãn Âm lịch, fix UX xóa empty input
